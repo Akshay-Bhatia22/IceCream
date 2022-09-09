@@ -74,7 +74,7 @@ class ContactUsForm(forms.ModelForm):
 
 class RegistrationForm(forms.ModelForm):
     # captcha = ReCaptchaField(widget=ReCaptchaWidget())
-    # captcha = ReCaptchaField()
+    captcha = ReCaptchaField()
 
     class Meta:
         model = Registration
@@ -88,7 +88,7 @@ class RegistrationForm(forms.ModelForm):
         fields = [
                     'name', 'phone','your_work','college_email',
                     'student_number','branch','year','roll_no',
-                    'gender','domain','skills', 'github_username', 'behance_username', 'is_hosteler'
+                    'gender','domain','skills', 'github_username', 'behance_username', 'captcha', 'is_hosteler'
                 ]
 
     def __init__(self, *args, **kwargs):
