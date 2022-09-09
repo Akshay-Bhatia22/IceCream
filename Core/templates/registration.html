@@ -26,12 +26,12 @@
         .page-footer {
             background: #1d1d1de7 url("{% static 'images/footer.svg' %}") repeat;
         }
-        /* .long_text_label_link{
+        .long_text_label_link{
             width: 80%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        } */
+        }
         @media only screen and (max-width:410px){
             .validationerror{
                 font-size: 12px;
@@ -884,7 +884,7 @@
             document.getElementById('roll_no_err').style.display = "block";
             return false;
         }else {
-        var roll_no_regex = "^(21)00270[0-9]{6}$"
+        var roll_no_regex = "^(21)0027[0-9]{7}$"
         // regex_string = "^(21)00270(15|11|12|14|10|13|00|31|21|32|40)[0-9]{4}$";
         var re = new RegExp(roll_no_regex);
             if(!re.test(roll_no)){
