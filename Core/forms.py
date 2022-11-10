@@ -10,6 +10,10 @@ from captcha.fields import ReCaptchaField
 from django.core.validators import URLValidator 
 from django.core.exceptions import ObjectDoesNotExist
 import re
+
+studentno_regex = "^((20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9])))|((21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(-{0,1})[mMdDlL])$"
+email_regex = "^[a-zA-Z]+(((20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9])))|((21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(-{0,1})[mMdDlL]))(@akgec.ac.in)$"
+
 validate_url = URLValidator()
 class ContactUsForm(forms.ModelForm):
     # captcha = ReCaptchaField(widget=ReCaptchaWidget())
@@ -86,9 +90,9 @@ class RegistrationForm(forms.ModelForm):
         #         ]
 
         fields = [
-                    'name', 'phone','your_work','college_email',
-                    'student_number','branch','year','roll_no',
-                    'gender','domain','skills', 'github_username', 'behance_username', 'captcha', 'is_hosteler'
+                    'name', 'college_email',
+                    'student_number','branch','year',
+                    'gender','captcha', 'is_hosteler'
                 ]
 
     def __init__(self, *args, **kwargs):
@@ -116,41 +120,41 @@ class RegistrationForm(forms.ModelForm):
             )
         )
 
-        self.fields['your_work'] = forms.CharField(
-            max_length=1000,required=False,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'name': 'your_work',
-                       'class': 'form-control',
-                       'id': 'your_work',
-                       'onblur': ''
-                       }
-            )
-        )
-        self.fields['phone'] = forms.CharField(
-            required=True,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'name': 'phone',
-                       'class': 'form-control',
-                       'id': 'Phone',
-                       'placeholder': 'Enter Phone No.',
-                       'onblur': ''
-                       }
-            )
-        )
-        self.fields['whatsapp'] = forms.CharField(
-            required=False,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'name': 'whatsapp',
-                       'class': 'form-control',
-                       'id': 'whatsapp',
-                       'placeholder': 'Enter whatsapp No.',
-                       'onblur': ''
-                       }
-            )
-        )
+        # self.fields['your_work'] = forms.CharField(
+        #     max_length=1000,required=False,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'name': 'your_work',
+        #                'class': 'form-control',
+        #                'id': 'your_work',
+        #                'onblur': ''
+        #                }
+        #     )
+        # )
+        # self.fields['phone'] = forms.CharField(
+        #     required=True,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'name': 'phone',
+        #                'class': 'form-control',
+        #                'id': 'Phone',
+        #                'placeholder': 'Enter Phone No.',
+        #                'onblur': ''
+        #                }
+        #     )
+        # )
+        # self.fields['whatsapp'] = forms.CharField(
+        #     required=False,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'name': 'whatsapp',
+        #                'class': 'form-control',
+        #                'id': 'whatsapp',
+        #                'placeholder': 'Enter whatsapp No.',
+        #                'onblur': ''
+        #                }
+        #     )
+        # )
         self.fields['student_number'] = forms.CharField(
             required=True,
             widget=forms.TextInput(
@@ -161,16 +165,16 @@ class RegistrationForm(forms.ModelForm):
                        'onblur': ''}
             )
         )
-        self.fields['roll_no'] = forms.CharField(
-            required=True,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'class': 'form-control',
-                       'id': 'Roll_no',
-                       'placeholder': 'Enter Roll Number',
-                       'onblur': ''}
-            )
-        )
+        # self.fields['roll_no'] = forms.CharField(
+        #     required=True,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'class': 'form-control',
+        #                'id': 'Roll_no',
+        #                'placeholder': 'Enter Roll Number',
+        #                'onblur': ''}
+        #     )
+        # )
         self.fields['branch'] = forms.ModelChoiceField(
             queryset=Branch.objects.filter(active=True).order_by('name'),
             initial=Branch.objects.filter(active=True).order_by('name').first(),
@@ -199,31 +203,31 @@ class RegistrationForm(forms.ModelForm):
                        }
             )
         )
-        self.fields['domain'] = forms.ModelChoiceField(
-            queryset=Domain.objects.all(),
-            initial=Domain.objects.all().first(),
-            required=True,
-            widget=forms.Select(
-                attrs={'class': 'form-control',
-                       'data-val': 'true',
-                       'data-val-required': '*',
-                       'id': 'domain',
-                       'name': 'domain',
-                       }
-            )
-        )
+        # self.fields['domain'] = forms.ModelChoiceField(
+        #     queryset=Domain.objects.all(),
+        #     initial=Domain.objects.all().first(),
+        #     required=True,
+        #     widget=forms.Select(
+        #         attrs={'class': 'form-control',
+        #                'data-val': 'true',
+        #                'data-val-required': '*',
+        #                'id': 'domain',
+        #                'name': 'domain',
+        #                }
+        #     )
+        # )
 
-        self.fields['skills'] = forms.CharField(
-            required=False,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'name': 'skills',
-                       'class': 'form-control',
-                       'id': 'skills',
-                       'onblur': ''
-                       }
-            )
-        )
+        # self.fields['skills'] = forms.CharField(
+        #     required=False,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'name': 'skills',
+        #                'class': 'form-control',
+        #                'id': 'skills',
+        #                'onblur': ''
+        #                }
+        #     )
+        # )
         self.fields['year'] = forms.ModelChoiceField(
             queryset=Year.objects.filter(active=True),
             initial=Year.objects.filter(active=True).first(),
@@ -236,44 +240,44 @@ class RegistrationForm(forms.ModelForm):
                        'name': 'Year'},
             ),
         )
-        self.fields['design_tools'] = forms.CharField(
-            required=False,
-            initial="",
-            label = "Names of designing tools you are familiar with(if any)?",
-            widget=forms.TextInput(
-            attrs={
-                'data-val': 'true',
-                'data-val-required': '*',
-                'id': 'design_tools',
-                'name': 'design_tools',
-                'type': 'text'
-                }
-            )
-        )
+        # self.fields['design_tools'] = forms.CharField(
+        #     required=False,
+        #     initial="",
+        #     label = "Names of designing tools you are familiar with(if any)?",
+        #     widget=forms.TextInput(
+        #     attrs={
+        #         'data-val': 'true',
+        #         'data-val-required': '*',
+        #         'id': 'design_tools',
+        #         'name': 'design_tools',
+        #         'type': 'text'
+        #         }
+        #     )
+        # )
 
-        self.fields['github_username'] = forms.CharField(
-            max_length=250, required=False,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'name': 'github_username',
-                       'class': 'form-control',
-                       'id': 'github_username',
-                       'placeholder': 'Enter Github username',
-                       'onblur': ''}
-            )
-        )
+        # self.fields['github_username'] = forms.CharField(
+        #     max_length=250, required=False,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'name': 'github_username',
+        #                'class': 'form-control',
+        #                'id': 'github_username',
+        #                'placeholder': 'Enter Github username',
+        #                'onblur': ''}
+        #     )
+        # )
 
-        self.fields['behance_username'] = forms.CharField(
-            max_length=250, required=False,
-            widget=forms.TextInput(
-                attrs={'type': 'text',
-                       'name': 'behance_username',
-                       'class': 'form-control',
-                       'id': 'behance_username',
-                       'placeholder': 'Enter Behance username',
-                       'onblur': ''}
-            )
-        )
+        # self.fields['behance_username'] = forms.CharField(
+        #     max_length=250, required=False,
+        #     widget=forms.TextInput(
+        #         attrs={'type': 'text',
+        #                'name': 'behance_username',
+        #                'class': 'form-control',
+        #                'id': 'behance_username',
+        #                'placeholder': 'Enter Behance username',
+        #                'onblur': ''}
+        #     )
+        # )
 
         TRUE_FALSE_CHOICES = (
         (True, 'Yes'),
@@ -305,10 +309,10 @@ class RegistrationForm(forms.ModelForm):
         except KeyError:
             raise ValidationError("")
 
-        try:
-            phone = cleaned_data['phone']
-        except KeyError:
-            raise ValidationError("")
+        # try:
+        #     phone = cleaned_data['phone']
+        # except KeyError:
+        #     raise ValidationError("")
             
         # try:
         #     whatsapp = cleaned_data['whatsapp']
@@ -327,70 +331,67 @@ class RegistrationForm(forms.ModelForm):
         #     raise ValidationError("")
 
 
-        hacker_rank_username = cleaned_data.get('hacker_rank_username')
-        github_username = cleaned_data.get('github_username')
-        behance_username = cleaned_data.get('behance_username')
+        # hacker_rank_username = cleaned_data.get('hacker_rank_username')
+        # github_username = cleaned_data.get('github_username')
+        # behance_username = cleaned_data.get('behance_username')
 
-        your_work = cleaned_data.get('your_work')
+        # your_work = cleaned_data.get('your_work')
         
-        if hacker_rank_username:
-            pattern = re.compile("^_*[a-zA-Z\\d]+[a-zA-z0-9]*$")
-            if not pattern.match(str(hacker_rank_username)):
-                return ValidationError("Invalid HackerRank Username")
+        # if hacker_rank_username:
+        #     pattern = re.compile("^_*[a-zA-Z\\d]+[a-zA-z0-9]*$")
+        #     if not pattern.match(str(hacker_rank_username)):
+        #         return ValidationError("Invalid HackerRank Username")
     
-        if github_username:
-            pattern = re.compile("^_*[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
-            if not pattern.match(str(github_username)):
-                return ValidationError("Invalid HackerRank Username")
+        # if github_username:
+        #     pattern = re.compile("^_*[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+        #     if not pattern.match(str(github_username)):
+        #         return ValidationError("Invalid HackerRank Username")
         
-        if behance_username:
-            pattern = re.compile("^([A-Za-z0-9\-\_])*$")
-            if not pattern.match(str(behance_username)):
-                return ValidationError("Invalid HackerRank Username")
+        # if behance_username:
+        #     pattern = re.compile("^([A-Za-z0-9\-\_])*$")
+        #     if not pattern.match(str(behance_username)):
+        #         return ValidationError("Invalid HackerRank Username")
 
 
-        if your_work:
-            your_work = your_work.split(',')
-            for link in your_work:
-                link = link.lstrip()
-                link = link.rstrip()
+        # if your_work:
+        #     your_work = your_work.split(',')
+        #     for link in your_work:
+        #         link = link.lstrip()
+        #         link = link.rstrip()
 
-                if (link[:7]).lower()!='http://' and link[:8].lower()!='https://':
-                    link = 'http://'+ link
-                try:
-                    validate_url(link)
-                except ValidationError:
-                    raise ValidationError(f'Your work : {link} is not a valid URL')
+        #         if (link[:7]).lower()!='http://' and link[:8].lower()!='https://':
+        #             link = 'http://'+ link
+        #         try:
+        #             validate_url(link)
+        #         except ValidationError:
+        #             raise ValidationError(f'Your work : {link} is not a valid URL')
  
-        # regex_student = "^(20|21)(15|11|12|14|10|13|00|31|21|32|40)[0-9][0-9][0-9](d|D|)[-]?[mdlMDL]?";
 
-        # registration for first year only
-        regex_student = "^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154|164)[0-9][0-9]))(d|D|)[-]?[mdlMDL]?$";    
-        pattern_student = re.compile(regex_student)
+
+        # regex_student = "^(20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154|164)[0-9][0-9]))(d|D|)[-]?[mdlMDL]?$";    
+        pattern_student = re.compile(studentno_regex)
 
         if student_number:
             if not pattern_student.match(str(student_number)):
                 raise ValidationError("Invalid Student Number")
 
-        # regex_college_email= "^[a-zA-Z]+(20|21)(15|11|12|14|10|13|00|31|21|32|40)[0-9][0-9][0-9](\@akgec\.ac\.in)$"
 
         # Check if college email contains the student number
-        regex_college_email1= f"^[a-zA-Z]+({str(student_number)})(\@akgec\.ac\.in)$"
-        regex_college_email2= "^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|(x|X){3})[0-9][0-9][0-9])|((154)[0-9][0-9]))(\@akgec.ac.in)$"
-        pattern_college_email1= re.compile(regex_college_email1)
-        pattern_college_email2= re.compile(regex_college_email2)
+
+        # regex_college_email2= "^[a-zA-Z]+(20)(((11|12|14|10|13|00|31|21|32|40|153|(x|X){3})[0-9][0-9][0-9])|((154)[0-9][0-9]))(\@akgec.ac.in)$"
+
+        pattern_college_email= re.compile(email_regex)
 
         if college_email:
-            if not pattern_college_email1.match(str(college_email)):
-                if not pattern_college_email2.match(str(college_email)):
-                    raise ValidationError("Invalid College Email")
+            if not pattern_college_email.match(str(college_email)):
+                raise ValidationError("Invalid College Email")
 
         regex_phone= "^[56789]\d{9}$"
         pattern_phone=re.compile(regex_phone)
 
-        if phone:
-            if not pattern_phone.match(str(phone)):
-                raise ValidationError("Invalid phone")
+        # if phone:
+        #     if not pattern_phone.match(str(phone)):
+        #         raise ValidationError("Invalid phone")
         # if whatsapp:
         #     if not pattern_phone.match(str(whatsapp)):
         #         raise ValidationError("Invalid Whatsapp number")
@@ -403,11 +404,7 @@ class RegistrationForm(forms.ModelForm):
             if not pattern_branch_code.match(student_number_branch_code):   
                 raise ValidationError("Student Number doesn't match that of branch code")
 
-        # regex_roll_no = "^(21)00270(15|11|12|14|10|13|00|31|21|32|40)[0-9]{4}$"
-        # pattern_roll_no = re.compile(regex_roll_no)
 
-        # if not pattern_roll_no.match(str(roll_no)):
-        #     raise ValidationError("Invalid Roll No. ")
 
         event = Event.objects.filter(active=True).first()
         if Registration.objects.filter(college_email=college_email, event=event).exists():
@@ -416,8 +413,8 @@ class RegistrationForm(forms.ModelForm):
             raise ValidationError('Registration with this Student Number already exist.')
         # elif Registration.objects.filter(roll_no=roll_no, event=event).exists():
         #     raise ValidationError('Registration with this roll number already exists.')
-        elif Registration.objects.filter(phone=phone, event=event).exists():
-            raise ValidationError('Registration with this phone already exist.')
+        # elif Registration.objects.filter(phone=phone, event=event).exists():
+        #     raise ValidationError('Registration with this phone already exist.')
         # elif Registration.objects.filter(whatsapp=whatsapp, event=event).exists():
         #     raise ValidationError('Registration with this whatsapp number already exist.')
 

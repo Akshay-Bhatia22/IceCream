@@ -124,14 +124,14 @@
                                 <span style="color: red" class='validationerror'>{{ form.college_email.errors }}</span>
                             </div>
                             <!-- Phone -->
-                            <div class="md-form">
+                            <!-- <div class="md-form">
 
                                 <i class="fas fa-phone prefix grey-text"></i>
                                 <input type="text" id="Phone" name="phone" class="form-control">
                                 <label for="Phone">Phone Number</label>
                                 <span id="phone_err" class='validationerror'>Invalid Phone Number </span>
                                 <span style="color: red" class='validationerror'>{{ form.phone.errors }}</span>
-                            </div>
+                            </div> -->
                             <!-- whatsapp -->
                             <!-- <div class="md-form">
                                 <i class="fab fa-whatsapp prefix grey-text"></i>
@@ -141,21 +141,21 @@
                                 <span style="color: red" class='validationerror'>{{ form.whatsapp.errors }}</span>
                             </div> -->
                             <!-- Roll no. -->
-                            <div class="md-form">
+                            <!-- <div class="md-form">
                                 <i class="far fa-id-card prefix grey-text"></i>
                                 <input type="text" id="Roll_no" name="roll_no" class="form-control">
                                 <label for="Roll_no">Roll no.</label>
                                 <span id="roll_no_err" class='validationerror'>Invalid Roll Number </span>
                                 <span style="color: red" class='validationerror'>{{ form.roll_no.errors }}</span>
-                            </div>
+                            </div> -->
                             <!-- Skills -->
-                            <div class="md-form">
+                            <!-- <div class="md-form">
                                 <i class="fa-solid fa-code prefix grey-text"></i>
                                 <input type="text" id="skills" name="skills" class="form-control">
                                 <label for="skills">Skills: HTML, CSS, Java...</label>
                                 <span id="skills_err" class='validationerror'>This field is required</span>
                                 <span style="color: red" class='validationerror'>{{ form.skills.errors }}</span>
-                            </div>
+                            </div> -->
                             <div class="md-form">
                             
                             <!--branch, year-->
@@ -177,7 +177,7 @@
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 p-1 ">
                                         {{ form.year.label }}
                                         <!-- <div class="hoverable">{{ form.year }}</div> -->
-                                        <input type="text" style="display: block; margin-top: 12px;" value="2nd Year" disabled>
+                                        <input type="text" style="display: block; margin-top: 12px;" value="3rd Year" disabled>
                                         <span id="year_err" class='validationerror'>Invalid Year </span>
                                         <span style="color: red" class='validationerror'>{ form.year.errors }}</span>
                                     </div>
@@ -193,11 +193,11 @@
                                 <div class="row p-1">
                                     
                                     <!--choose domain-->
-                                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 p-1 ">
+                                    <!-- <div class="col-12 col-sm-12 col-md-4 col-lg-4 p-1 ">
                                         {{ form.domain.label }}
                                         <div class="hoverable">{{ form.domain }}</div>
                                         <span style="color: red" class='validationerror'>{{ form.domain.errors }}</span>
-                                    </div> 
+                                    </div>  -->
                                     <!-- choose Hosteler -->
                                     <div class="col-12 col-sm-12 col-md-4 col-lg-4 p-1 ">
                                         {{ form.is_hosteler.label }}
@@ -226,31 +226,31 @@
                             </div> -->
                             
                             <!-- GitHub Username -->
-                            <div class="md-form" id='github'>
+                            <!-- <div class="md-form" id='github'>
                                 <i class="fa-brands fa-github prefix grey-text"></i>
                                 <input type="text" id="github_username" name="github_username" class="form-control">
                                 <label for="github_username">Github Username</label>
                                 <span id="github_username_err" class='validationerror'>Invalid Username</span>
                                 <span style="color: red" class='validationerror'>{{ form.github_username.errors }}</span>
-                            </div>
+                            </div> -->
                             
                             <!-- Behance Username -->
-                            <div class="md-form" id='behance'>
+                            <!-- <div class="md-form" id='behance'>
                                 <i class="fa-brands fa-square-behance prefix grey-text"></i>
                                 <input type="text" id="behance_username" name="behance_username" class="form-control">
                                 <label for="behance_username">Behance Username</label>
                                 <span id="behance_username_err" class='validationerror'>Invalid Username</span>
                                 <span style="color: red" class='validationerror'>{{ form.behance_username.errors }}</span>
-                            </div>
+                            </div> -->
                             
                             <!-- Your works -->
-                            <div class="md-form">
+                            <!-- <div class="md-form">
                                 <i class="fa-solid fa-link prefix grey-text"></i>
                                 <input type="text" id="your_work" name="your_work" class="form-control">
                                 <label class="long_text_label_link" for="your_work">Link to your work or coding profiles (if any)</label>
                                 <span id="your_work_err" class='validationerror'>Invalid Links</span>
                                 <span style="color: red" class='validationerror'>{{ form.your_work.errors }}</span>
-                            </div>
+                            </div> -->
                             
                             <!-- Captcha -->
                             <center>
@@ -443,6 +443,9 @@
 <!-- User js -->
 
 <script>
+    var studentno_regex = "^((20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9])))|((21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(-{0,1})[mMdDlL])$"
+    var email_regex = "^[a-zA-Z]+(((20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9])))|((21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(-{0,1})[mMdDlL]))(@akgec.ac.in)$"
+
     function isValidHttpUrl(string) {
 
             var regex = new RegExp("^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$",'i');
@@ -555,11 +558,8 @@
                     return;
                 }
                 
-                // var regex = new RegExp("^(20|21)(15|11|12|14|10|13|00|31|21|32|40)[0-9][0-9][0-9](d|D|)[-]?[mdlMDL]?$");
 
-                //regex for registration for 1st year only
-                var regex = new RegExp("^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(d|D|)[-]?[mdlMDL]?$");
-                // var regex = new RegExp("^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9]))?$");
+                var regex = new RegExp(studentno_regex);
 
                 if (!regex.test($("#Student").val())) {
                     document.getElementById('studentno_err').innerHTML = "Invalid Student Number";
@@ -577,8 +577,7 @@
                 //student number and Email Id's student number Validation
                 if($("#Email").val()!=''){
                     // Check if email is valid
-                    var regex = new RegExp(/^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|(x|X){3})[0-9][0-9][0-9])|((154|164)[0-9][0-9]))@(\akgec.ac.in)$/);
-                    // var regex = new RegExp(/^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9]))@(\akgec.ac.in)$/);
+                    var regex = new RegExp(email_regex);
                     if (!regex.test($("#Email").val())) {
                         document.getElementById('email_err').innerHTML = "Invalid Email Id";
                         $( "#email_err" ).show();
@@ -586,10 +585,10 @@
                     }
 
                     var email = $("#Email").val().toLowerCase().replace('xxx', '164')
-                    var regex_exp = $("#Student").val()
-                    var regex_exp_email = `^[a-zA-Z]+(${regex_exp})@(\akgec.ac.in)$`
-                    console.log(regex_exp_email)
-                    var re = new RegExp(regex_exp_email);
+                    // var regex_exp = $("#Student").val()
+                    // var regex_exp_email = `^[a-zA-Z]+(${regex_exp})@(\akgec.ac.in)$`
+                    // console.log(regex_exp_email)
+                    var re = new RegExp(email_regex);
                     // var re = new RegExp(`(${regex_exp})`)
                     if (!re.test(email)) {
                         document.getElementById('studentno_err').innerHTML = "Student Number doesn't match that of Email";
@@ -616,13 +615,10 @@
                     $( "#email_err" ).show();
                     return;
                 }
-                // var regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-                // var regex = new RegExp(/^[a-zA-Z]+(20|21)(15|11|12|14|10|13|00|31|21|32|40)[0-9][0-9][0-9]@(\akgec.ac.in)$/);
 
-                // registrations for first year only
-                var regex = new RegExp(/^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|(x|X){3})[0-9][0-9][0-9])|((154|164)[0-9][0-9]))@(\akgec.ac.in)$/);
-                // var regex = new RegExp(/^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9]))@(\akgec.ac.in)$/);
+                var regex = new RegExp(email_regex);
+                
                 if (!regex.test($("#Email").val())) {
                     document.getElementById('email_err').innerHTML = "Invalid Email Id";
                     $( "#email_err" ).show();
@@ -635,9 +631,9 @@
                     return;
                 }
                 
-                //regex for registration for 1st year only
-                var regex = new RegExp("^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(d|D|)[-]?[mdlMDL]?$");
-                // var regex = new RegExp("^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9]))?$");
+
+                var regex = new RegExp(studentno_regex);
+
 
                 if (!regex.test($("#Student").val())) {
                     document.getElementById('studentno_err').innerHTML = "Invalid Student Number";
@@ -647,10 +643,10 @@
 
                 //student number and Email Id's student number Validation
                 var email = $("#Email").val().toLowerCase().replace('xxx', '164')
-                var regex_exp = $("#Student").val()
-                var regex_exp_email = `^[a-zA-Z]+(${regex_exp})@(\akgec.ac.in)$`
+                // var regex_exp = $("#Student").val()
+                // var regex_exp_email = `^[a-zA-Z]+(${regex_exp})@(\akgec.ac.in)$`
                 console.log(regex_exp_email)
-                var re = new RegExp(regex_exp_email);
+                var re = new RegExp(email_regex);
                 // var re = new RegExp(`(${regex_exp})`)
                 if (!re.test(email)) {
                     document.getElementById('studentno_err').innerHTML = "Student Number doesn't match that of Email";
@@ -801,6 +797,9 @@
 </script>
 
 <script>
+    var studentno_regex = "^((20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9])))|((21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(-{0,1})[mMdDlL])$"
+    var email_regex = "^[a-zA-Z]+(((20)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9])))|((21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154)[0-9][0-9]))(-{0,1})[mMdDlL]))(@akgec.ac.in)$"
+
     function isValidHttpUrl(string) {
 
             var regex = new RegExp("^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$","i");
@@ -832,11 +831,9 @@
             return false;
         }else {
 
-            // var re=/^[a-zA-Z]+(20|21)(15|11|12|14|10|13|00|31|21|32|40)[0-9][0-9][0-9]@(\akgec.ac.in)$/;
-            
-            // First year Registration only
-            var re=/^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|(x|X){3})[0-9][0-9][0-9])|((154|164)[0-9][0-9]))@(\akgec.ac.in)$/;
-            // var re=/^[a-zA-Z]+(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9]))@(\akgec.ac.in)$/;
+
+            var re=/^[a-zA-Z]+(20)(((11|12|14|10|13|00|31|21|32|40|153|(x|X){3})[0-9][0-9][0-9])|((154|164)[0-9][0-9]))@(\akgec.ac.in)$/;
+
             if(!re.test(email)){
                 document.getElementById('email_err').innerHTML = "Email is not valid";
                 document.getElementById('email_err').style.display = "block";
@@ -851,12 +848,9 @@
             document.getElementById('studentno_err').style.display = "block";
             return false;
         }else {
-            // regex_string = "^(20|21)(15|11|12|14|10|13|00|31|21|32|40)[0-9][0-9][0-9](d|D|)[-]?[mdlMDL]?$";
-            
-            // First Year Registration only
-            regex_string = "^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9])|((154|164)[0-9][0-9]))$"
-            // regex_string = "^(21)(((11|12|14|10|13|00|31|21|32|40|153|164)[0-9][0-9][0-9]))$"
-            var re = new RegExp(regex_string);
+
+
+            var re = new RegExp(studentno_regex);
             if(!re.test(student_no)){
                 document.getElementById('studentno_err').innerHTML = "Student number is not valid";
                 document.getElementById('studentno_err').style.display = "block";
@@ -877,39 +871,39 @@
                 }
         }
 
-        // Roll no. validation
-        var roll_no =  document.getElementById('Roll_no').value;
-        if (roll_no == "") {
-            document.getElementById('roll_no_err').innerHTML = "Roll number cannot be empty";
-            document.getElementById('roll_no_err').style.display = "block";
-            return false;
-        }else {
-        var roll_no_regex = "^(21)0027[0-9]{7}$"
-        // regex_string = "^(21)00270(15|11|12|14|10|13|00|31|21|32|40)[0-9]{4}$";
-        var re = new RegExp(roll_no_regex);
-            if(!re.test(roll_no)){
-                document.getElementById('roll_no_err').innerHTML = "Roll number is not valid";
-                document.getElementById('roll_no_err').style.display = "block";
+        // // Roll no. validation
+        // var roll_no =  document.getElementById('Roll_no').value;
+        // if (roll_no == "") {
+        //     document.getElementById('roll_no_err').innerHTML = "Roll number cannot be empty";
+        //     document.getElementById('roll_no_err').style.display = "block";
+        //     return false;
+        // }else {
+        // var roll_no_regex = "^(20)0027[0-9]{7}$"
 
-                return false;
-            }
-        }
+        // var re = new RegExp(roll_no_regex);
+        //     if(!re.test(roll_no)){
+        //         document.getElementById('roll_no_err').innerHTML = "Roll number is not valid";
+        //         document.getElementById('roll_no_err').style.display = "block";
 
-        // Phone number validation
-        var phone = document.getElementById('Phone').value;
-        if (phone == "") {
-            document.getElementById('phone_err').innerHTML = "Phone cannot be empty";
-            document.getElementById('phone_err').style.display = "block";
+        //         return false;
+        //     }
+        // }
 
-            return false;
-        }else{
-                var re = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/);
-                if(!re.test(phone)){
-                    document.getElementById('phone_err').innerHTML = "Phone number is not valid";
-                    document.getElementById('phone_err').style.display = "block";
-                    return false;
-                }
-        }
+        // // Phone number validation
+        // var phone = document.getElementById('Phone').value;
+        // if (phone == "") {
+        //     document.getElementById('phone_err').innerHTML = "Phone cannot be empty";
+        //     document.getElementById('phone_err').style.display = "block";
+
+        //     return false;
+        // }else{
+        //         var re = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[6789]\d{9}|(\d[ -]?){10}\d$/);
+        //         if(!re.test(phone)){
+        //             document.getElementById('phone_err').innerHTML = "Phone number is not valid";
+        //             document.getElementById('phone_err').style.display = "block";
+        //             return false;
+        //         }
+        // }
 
         // Whatsapp number validation
         // var whatsapp = document.getElementById('whatsapp').value;
