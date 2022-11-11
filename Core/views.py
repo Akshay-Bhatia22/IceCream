@@ -9,7 +9,7 @@ from email.mime.image import MIMEImage
 # from django.core.urlresolvers import reverse_lazy
 
 from .forms import RegistrationForm, ContactUsForm, RegistrationAlumni
-from .models import Project, Member, ContactInfo, Blog, Event, ContactUs, Registration, EmailContent, EmailAttachment, AlumniRegistration
+from .models import Project, Member, ContactInfo, Blog, Event, ContactUs, Registration, EmailContent, EmailAttachment, AlumniRegistration, EmailTemplate
 from IceCream.settings.base import RECEIVER_EMAIL, EMAIL_HOST_USER
 
 import json
@@ -124,59 +124,48 @@ class RegistrationView(FormView):
             person = form.cleaned_data['name']
             registration = form.save()
 
-            # allowed = False
+            
+            template = Event.objects.filter(active=True).first().email_template.active_template()
+            print(template)
+            message = render_to_string(template[1], {
+                'event': self.event,
+                'name': person,
+            })
+            
+            from_mail = EMAIL_HOST_USER
+            # to_mail = ['ankit1911006@akgec.ac.in']
+            to_mail = [event_receiver_email]
 
-            # try:
-            #     allowed = (EmailContent.objects.get(event=self.event)).mail_allowed
-            # except EmailContent.DoesNotExist:
-            #     pass
-            allowed = True
+            # mail = EmailMessage(subject, message, from_mail, to_mail)
+            mail = EmailMessage(template[0], message, from_mail, to_mail)
+            mail.content_subtype = "html"
+            mail.mixed_subtype = 'related'
 
-            if allowed:
-                content = EmailContent.objects.get(event=self.event)
-                # all_files = EmailAttachment.objects.filter(event=self.event)
+            # image_sub_type = (str(self.event.pic_path).split('.'))[-1]
+            # event_image = MIMEImage(self.event.pic_path.read(), _subtype=image_sub_type)
+            # event_image.add_header('Content-ID', '<{}>'.format(self.event.pic_path))
+            # mail.attach(event_image)
 
-                subject = content.subject
-                message = render_to_string('registration-response-email.html', {
-                    'content': content,
-                    'event': self.event,
-                    'name': person,
-                })
-                
-                from_mail = EMAIL_HOST_USER
-                # to_mail = ['ankit1911006@akgec.ac.in']
-                to_mail = [event_receiver_email]
-
-                # mail = EmailMessage(subject, message, from_mail, to_mail)
-                mail = EmailMessage(subject, message, from_mail, to_mail)
-                mail.content_subtype = "html"
-                mail.mixed_subtype = 'related'
-
-               # image_sub_type = (str(self.event.pic_path).split('.'))[-1]
-               # event_image = MIMEImage(self.event.pic_path.read(), _subtype=image_sub_type)
-               # event_image.add_header('Content-ID', '<{}>'.format(self.event.pic_path))
-               # mail.attach(event_image)
-
-                # for single_file in all_files:
-                #     mail.attach(filename=single_file.name,
-                #                 content=single_file.files.read())
-                #adding mail sent status
-                try:
-                    mail.send(fail_silently=False)
-                    registration.mail_sent_status = True
-                    registration.save()
-                except:
-                    pass
-                
-                
-                ##############
-            messages.add_message(request, messages.SUCCESS,
-                                 "Please check your email.")
-            return redirect(reverse_lazy('registration'))
-        else:
-            if '__all__' in dict(form.errors):
-                alert = dict(form.errors)['__all__']
-            return render(request, 'registration.html', {'form': form, 'event': self.event, 'alert':alert})
+            # for single_file in all_files:
+            #     mail.attach(filename=single_file.name,
+            #                 content=single_file.files.read())
+            #adding mail sent status
+            try:
+                mail.send(fail_silently=False)
+                registration.mail_sent_status = True
+                registration.save()
+            except:
+                print("not sent")
+            
+            
+            ##############
+        messages.add_message(request, messages.SUCCESS,
+                                "Please check your email.")
+        return redirect(reverse_lazy('registration'))
+        # else:
+        #     if '__all__' in dict(form.errors):
+        #         alert = dict(form.errors)['__all__']
+        #     return render(request, 'registration.html', {'form': form, 'event': self.event, 'alert':alert})
 
     def get(self, request, *args, **kwargs):
         if self.event:

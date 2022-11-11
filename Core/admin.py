@@ -2,7 +2,7 @@ from django.contrib import admin
 from import_export.admin import ImportExportActionModelAdmin
 from .models import Technology, Member, Designation, Project, ContactUs, \
  Registration, Branch, Gender, Year,Domain, ContactInfo, Blog, Event, EmailContent, \
- EmailAttachment, AlumniRegistration
+ EmailAttachment, AlumniRegistration, EmailTemplate
 # from .forms import RegistrationForm
 
 admin.site.site_header = "Software Incubator Administration"
@@ -43,3 +43,4 @@ admin.site.register(Blog)
 admin.site.register(EmailAttachment)
 admin.site.register(EmailContent)
 admin.site.register(AlumniRegistration)
+admin.site.register(EmailTemplate)

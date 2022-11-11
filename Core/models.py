@@ -307,3 +307,24 @@ class AlumniRegistration(models.Model):
 
     def __str__(self):
         return self.name
+
+class EmailTemplate(models.Model):
+    types=[('primary','primary'), 
+            ('alternate','alterante')]
+    event = models.OneToOneField(to=Event, on_delete=models.CASCADE, primary_key=True, related_name="email_template")
+    subject_primary = models.CharField(max_length=200, null=True)
+    primary = models.CharField(max_length=100, default="registration-response-email.html")
+    subject_alternate = models.CharField(max_length=200, null=True)
+    alternate = models.CharField(max_length=100, default="")
+    primary_limit = models.IntegerField()
+    
+    def active_template(self) -> list:
+        if self.primary_limit > 0:
+            if Registration.objects.count() <= self.primary_limit:
+                print(Registration.objects.count())
+                return [self.subject_primary, self.primary]
+            return [self.subject_alternate, self.alternate]
+        return [self.subject_primary, self.primary]
+    
+    def __str__(self) -> str:
+        return self.event.name
